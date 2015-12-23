@@ -20,17 +20,22 @@
 # definition file).
 #
 
-# Inherit from common a5ultexx
+# Inherit from common a5
 -include device/samsung/a5-common/BoardConfigCommon.mk
 
 # Inherit from the proprietary version
 -include vendor/samsung/a5ultexx/BoardConfigVendor.mk
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := a5ulte,a5ultexx,SM-A500FU
+TARGET_OTA_ASSERT_DEVICE := a5ulte,a5ultexx,a5ltedd
 
 # Kernel
 TARGET_KERNEL_CONFIG := cyanogen_a5ultexx_defconfig
 
 # TWRP
 DEVICE_RESOLUTION := 720x1280
+
+# Vendor Init
+TARGET_UNIFIED_DEVICE := true
+TARGET_INIT_VENDOR_LIB := libinit_msm
+TARGET_LIBINIT_DEFINES_FILE := device/samsung/a5ultexx/init/init_a5lte.cpp
