@@ -27,7 +27,7 @@
 -include vendor/samsung/a5ultexx/BoardConfigVendor.mk
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := a5ulte,a5ultexx,a5ltedd
+TARGET_OTA_ASSERT_DEVICE := a5ulte,a5ultexx,a5lte
 
 # Kernel
 TARGET_KERNEL_CONFIG := cyanogen_a5ultexx_defconfig
