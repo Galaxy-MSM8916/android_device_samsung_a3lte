@@ -60,6 +60,12 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         property_set("ro.build.description", "a5ultexx-user 5.0.2 LRX22G A500FUXXU1BOE6 release-keys");
         property_set("ro.product.model", "SM-A500FU");
         property_set("ro.product.device", "a5ulte");
+    } else if (strstr(bootloader, "A500F")) {
+        /* SM-A500F */
+        property_set("ro.build.fingerprint", "samsung/a5ltexx/a5lte:5.0.2/LRX22G/A500FXXU1BOH4:user/release-keys");
+        property_set("ro.build.description", "a5ltexx-user 5.0.2 LRX22G A500FXXU1BOH4 release-keys");
+        property_set("ro.product.model", "SM-A500F");
+        property_set("ro.product.device", "a5lte");
     } else if (strstr(bootloader, "A500G")) {
         /* SM-A500G */
         property_set("ro.build.fingerprint", "samsung/a5ltedd/a5lte:5.0.2/LRX22G/A500GXXU1BOJ2:user/release-keys");
