@@ -33,7 +33,7 @@ TARGET_OTA_ASSERT_DEVICE := a5ulte,a5ultexx,a5lte
 TARGET_KERNEL_CONFIG := cyanogen_a5ultexx_defconfig
 
 # TWRP
-DEVICE_RESOLUTION := 720x1280
+TW_THEME := portrait_hdpi
 
 # Vendor Init
 TARGET_UNIFIED_DEVICE := true
