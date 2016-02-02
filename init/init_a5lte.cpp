@@ -36,6 +36,12 @@
 
 #include "init_msm.h"
 
+void init_dsds() {
+    property_set("ro.multisim.set_audio_params", "true");
+    property_set("ro.multisim.simslotcount", "2");
+    property_set("persist.radio.multisim.config", "dsds");
+}
+
 void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *board_type)
 {
     char platform[PROP_VALUE_MAX];
@@ -66,12 +72,16 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         property_set("ro.build.description", "a5ltexx-user 5.0.2 LRX22G A500FXXU1BOH4 release-keys");
         property_set("ro.product.model", "SM-A500F");
         property_set("ro.product.device", "a5lte");
+
+        init_dsds();
     } else if (strstr(bootloader, "A500G")) {
         /* SM-A500G */
         property_set("ro.build.fingerprint", "samsung/a5ltedd/a5lte:5.0.2/LRX22G/A500GXXU1BOJ2:user/release-keys");
         property_set("ro.build.description", "a5ltedd-user 5.0.2 LRX22G A500GXXU1BOJ2 release-keys");
         property_set("ro.product.model", "SM-A500G");
         property_set("ro.product.device", "a5lte");
+
+        init_dsds();
     }
 
     property_get("ro.product.device", device);
