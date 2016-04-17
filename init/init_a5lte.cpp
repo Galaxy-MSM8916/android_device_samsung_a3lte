@@ -82,6 +82,14 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
         property_set("ro.product.device", "a5lte");
 
         init_dsds();
+    } else if (strstr(bootloader, "A500M")) {
+        /* SM-A500M */
+        property_set("ro.build.fingerprint", "samsung/a5lteub/a5lte:5.0.2/LRX22G/A500MUBU1BPB2:user/release-keys");
+        property_set("ro.build.description", "a5lteub-user 5.0.2 LRX22G A500MUBU1BPB2 release-keys");
+        property_set("ro.product.model", "SM-A500M");
+        property_set("ro.product.device", "a5lte");
+
+        init_dsds();
     }
 
     property_get("ro.product.device", device);
