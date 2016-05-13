@@ -37,5 +37,5 @@ TW_THEME := portrait_hdpi
 
 # Vendor Init
 TARGET_UNIFIED_DEVICE := true
-TARGET_INIT_VENDOR_LIB := libinit_msm
-TARGET_LIBINIT_DEFINES_FILE := device/samsung/a5ultexx/init/init_a5lte.cpp
+TARGET_INIT_VENDOR_LIB := libinit_a5lte
+TARGET_RECOVERY_DEVICE_MODULES := libinit_a5lte
