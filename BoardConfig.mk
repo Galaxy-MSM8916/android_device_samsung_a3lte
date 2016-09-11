@@ -20,22 +20,22 @@
 # definition file).
 #
 
-# Inherit from common a5
--include device/samsung/a5-common/BoardConfigCommon.mk
+# Inherit from common a3
+-include device/samsung/a3-common/BoardConfigCommon.mk
 
 # Inherit from the proprietary version
--include vendor/samsung/a5ultexx/BoardConfigVendor.mk
+-include vendor/samsung/a3ltexx/BoardConfigVendor.mk
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := a5ulte,a5ultexx,a5lte
+TARGET_OTA_ASSERT_DEVICE := a3ltexx,a3ultexx,a33gxx,a33g
 
 # Kernel
-TARGET_KERNEL_CONFIG := cyanogen_a5ultexx_defconfig
+TARGET_KERNEL_CONFIG := cyanogen_a3ltexx_defconfig
 
 # TWRP
 TW_THEME := portrait_hdpi
 
 # Vendor Init
 TARGET_UNIFIED_DEVICE := true
-TARGET_INIT_VENDOR_LIB := libinit_a5lte
-TARGET_RECOVERY_DEVICE_MODULES := libinit_a5lte
+TARGET_INIT_VENDOR_LIB := libinit_a3lte
+TARGET_RECOVERY_DEVICE_MODULES := libinit_a3lte
