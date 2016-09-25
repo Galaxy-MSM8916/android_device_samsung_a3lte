@@ -28,6 +28,7 @@
  */
 
 #include <stdlib.h>
+#include <cutils/properties.h>
 
 #include "vendor_init.h"
 #include "property_service.h"
@@ -50,11 +51,11 @@ void vendor_load_properties()
     char devicename[PROP_VALUE_MAX];
     int rc;
 
-    rc = property_get("ro.board.platform", platform);
+    rc = property_get("ro.board.platform", platform, "");
     if (!rc || !ISMATCH(platform, ANDROID_TARGET))
         return;
 
-    property_get("ro.bootloader", bootloader);
+    property_get("ro.bootloader", bootloader, "A300F");
 
     if (strstr(bootloader, "A300FU")) {
         /* SM-A300FU */
@@ -71,7 +72,7 @@ void vendor_load_properties()
 
         init_dsds();
     } else if (strstr(bootloader, "A300H")) {
-        /* SM-A500G */
+        /* SM-A300H */
         property_set("ro.build.fingerprint", "samsung/a33gxx/a33g:5.0.2/LRX22G/A300HXXS1BPE1:user/release-keys");
         property_set("ro.build.description", "a33gxx-user 5.0.2 LRX22G A300HXXS1BPE1 release-keys");
         property_set("ro.product.model", "SM-A300H");
@@ -80,7 +81,7 @@ void vendor_load_properties()
         init_dsds();
     }
 
-    property_get("ro.product.device", device);
+    property_get("ro.product.device", device, "A300?");
     strlcpy(devicename, device, sizeof(devicename));
     INFO("Found bootloader id %s setting build properties for %s device\n", bootloader, devicename);
 }

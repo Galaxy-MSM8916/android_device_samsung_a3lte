@@ -31,6 +31,7 @@ TARGET_OTA_ASSERT_DEVICE := a3ltexx,a3ultexx,a33gxx,a33g
 
 # Kernel
 TARGET_KERNEL_CONFIG := cyanogen_a3ltexx_defconfig
+TARGET_NO_RECOVERY := true
 
 # TWRP
 TW_THEME := portrait_hdpi
