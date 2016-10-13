@@ -19,6 +19,8 @@ $(call inherit-product-if-exists, vendor/samsung/a3ltexx/a3ltexx-vendor.mk)
 # Boot animation
 TARGET_SCREEN_HEIGHT := 960
 TARGET_SCREEN_WIDTH := 540
+PRODUCT_AAPT_PREF_CONFIG := hdpi
+PRODUCT_AAPT_CONFIG := normal
 
 # Device overlay
 DEVICE_PACKAGE_OVERLAYS += device/samsung/a3ltexx/overlay
