@@ -58,25 +58,31 @@ void vendor_load_properties()
     property_get("ro.bootloader", bootloader, "A300F");
 
     if (strstr(bootloader, "A300FU")) {
-        /* SM-A300FU */
+        /* SM-A300FU 
         property_set("ro.build.fingerprint", "samsung/a3ultexx/a3ulte:5.0.2/LRX22G/A300FUXXU1BOE6:user/release-keys");
-        property_set("ro.build.description", "a3ultexx-user 5.0.2 LRX22G A300FUXXU1BOE6 release-keys");
+        property_set("ro.build.description", "a3ultexx-user 5.0.2 LRX22G A300FUXXU1BOE6 release-keys");*/
         property_set("ro.product.model", "SM-A300FU");
         property_set("ro.product.device", "a3ulte");
     } else if (strstr(bootloader, "A300F")) {
-        /* SM-A300F */
+        /* SM-A300F 
         property_set("ro.build.fingerprint", "samsung/a3ltexx/a3lte:5.0.2/LRX22G/A300FXXU1BOK4:user/release-keys");
-        property_set("ro.build.description", "a3ltexx-user 5.0.2 LRX22G A300FXXU1BOK4 release-keys");
+        property_set("ro.build.description", "a3ltexx-user 5.0.2 LRX22G A300FXXU1BOK4 release-keys");*/
         property_set("ro.product.model", "SM-A300F");
         property_set("ro.product.device", "a3lte");
 
         init_dsds();
     } else if (strstr(bootloader, "A300H")) {
-        /* SM-A300H */
+        /* SM-A300H 
         property_set("ro.build.fingerprint", "samsung/a33gxx/a33g:5.0.2/LRX22G/A300HXXS1BPE1:user/release-keys");
-        property_set("ro.build.description", "a33gxx-user 5.0.2 LRX22G A300HXXS1BPE1 release-keys");
+        property_set("ro.build.description", "a33gxx-user 5.0.2 LRX22G A300HXXS1BPE1 release-keys");*/
         property_set("ro.product.model", "SM-A300H");
         property_set("ro.product.device", "a33g");
+
+        init_dsds();
+    } else {
+        /* SM-A300? */
+        property_set("ro.product.model", bootloader);
+        property_set("ro.product.device", "a3lte");
 
         init_dsds();
     }
