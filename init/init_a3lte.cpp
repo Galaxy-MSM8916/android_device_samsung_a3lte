@@ -29,6 +29,8 @@
 
 #include <stdlib.h>
 #include <cutils/properties.h>
+#include <fstream>
+#include <string>
 
 #include "vendor_init.h"
 #include "property_service.h"
@@ -41,6 +43,17 @@ void init_dsds() {
     property_set("ro.multisim.set_audio_params", "true");
     property_set("ro.multisim.simslotcount", "2");
     property_set("persist.radio.multisim.config", "dsds");
+}
+
+void init_ss() {
+    property_set("ro.multisim.set_audio_params", "false");
+    property_set("ro.multisim.simslotcount", "1");
+    property_set("persist.radio.multisim.config", "ss");
+}
+
+bool FileExists(const std::string& path)
+{
+        return std::ifstream(path.c_str()).good();
 }
 
 void vendor_load_properties()
@@ -58,34 +71,71 @@ void vendor_load_properties()
     property_get("ro.bootloader", bootloader, "A300F");
 
     if (strstr(bootloader, "A300FU")) {
-        /* SM-A300FU 
-        property_set("ro.build.fingerprint", "samsung/a3ultexx/a3ulte:5.0.2/LRX22G/A300FUXXU1BOE6:user/release-keys");
-        property_set("ro.build.description", "a3ultexx-user 5.0.2 LRX22G A300FUXXU1BOE6 release-keys");*/
+        /* SM-A300FU */
         property_set("ro.product.model", "SM-A300FU");
         property_set("ro.product.device", "a3ulte");
+		property_set("ro.product.name", "a3ultexx");
+	} else if (strstr(bootloader, "A300YZ")) {
+        /* SM-A300YZ */
+        property_set("ro.product.model", "SM-A300YZ");
+        property_set("ro.product.device", "a3ltezt");
+        property_set("ro.product.name", "a3ltezt");
+    } else if (strstr(bootloader, "A3000")) {
+        /* SM-A3000 */
+        property_set("ro.product.model", "SM-A3000");
+        property_set("ro.product.device", "a3ltechn");
+        property_set("ro.product.name", "a3ltezc");
+    } else if (strstr(bootloader, "A3009")) {
+        /* SM-A3009 */
+        property_set("ro.product.model", "SM-A3009");
+        property_set("ro.product.device", "a3ltectc");
+        property_set("ro.product.name", "a3ltectc");
     } else if (strstr(bootloader, "A300F")) {
-        /* SM-A300F 
-        property_set("ro.build.fingerprint", "samsung/a3ltexx/a3lte:5.0.2/LRX22G/A300FXXU1BOK4:user/release-keys");
-        property_set("ro.build.description", "a3ltexx-user 5.0.2 LRX22G A300FXXU1BOK4 release-keys");*/
+        /* SM-A300F */
         property_set("ro.product.model", "SM-A300F");
         property_set("ro.product.device", "a3lte");
-
-        init_dsds();
+        property_set("ro.product.name", "a3ltexx");
     } else if (strstr(bootloader, "A300H")) {
-        /* SM-A300H 
-        property_set("ro.build.fingerprint", "samsung/a33gxx/a33g:5.0.2/LRX22G/A300HXXS1BPE1:user/release-keys");
-        property_set("ro.build.description", "a33gxx-user 5.0.2 LRX22G A300HXXS1BPE1 release-keys");*/
+        /* SM-A300H */
         property_set("ro.product.model", "SM-A300H");
         property_set("ro.product.device", "a33g");
-
-        init_dsds();
+        property_set("ro.product.name", "a33gxx");
+	} else if (strstr(bootloader, "A300M")) {
+        /* SM-A300M */
+        property_set("ro.product.model", "SM-A300M");
+        property_set("ro.product.device", "a3lte");
+        property_set("ro.product.name", "a3lteub");
+	} else if (strstr(bootloader, "A300G")) {
+        /* SM-A300G */
+        property_set("ro.product.model", "SM-A300G");
+        property_set("ro.product.device", "a3ltedd");
+        property_set("ro.product.name", "a3ltezso");
+	} else if (strstr(bootloader, "A300Y")) {
+        /* SM-A300Y */
+        property_set("ro.product.model", "SM-A300Y");
+        property_set("ro.product.device", "a3ulte");
+        property_set("ro.product.name", "a3ultedv");
     } else {
         /* SM-A300? */
         property_set("ro.product.model", bootloader);
         property_set("ro.product.device", "a3lte");
-
-        init_dsds();
     }
+
+	int curlang;
+	curlang = property_get("ro.product.locale", platform, ""); 
+	if (!curlang) {	
+		if (FileExists("system/loader/rus.lang")) {
+		property_set("ro.product.locale", "ru-RU");
+		} else {
+		property_set("ro.product.locale", "en-US");
+		}
+	}
+
+		if (FileExists("system/loader/dual.sim")) {
+		init_dsds();
+		} else {
+		init_ss();
+		}
 
     property_get("ro.product.device", device, "A300?");
     strlcpy(devicename, device, sizeof(devicename));
