@@ -34,10 +34,7 @@ TARGET_KERNEL_CONFIG := msm8916_sec_defconfig
 #cyanogen_a3ltexx_defconfig
 TARGET_KERNEL_VARIANT_CONFIG := msm8916_sec_a3_eur_defconfig
 TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
-TARGET_NO_RECOVERY := true
-
-# TWRP
-TW_THEME := portrait_hdpi
+#TARGET_NO_RECOVERY := true
 
 # Vendor Init
 TARGET_UNIFIED_DEVICE := true
