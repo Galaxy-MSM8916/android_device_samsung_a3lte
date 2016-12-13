@@ -30,6 +30,7 @@
 #include <stdlib.h>
 #include <cutils/properties.h>
 #include <fstream>
+#include <iostream>
 #include <string>
 
 #include "vendor_init.h"
@@ -131,9 +132,24 @@ void vendor_load_properties()
 		}
 	}
 
-		if (FileExists("system/loader/dual.sim")) {
-		init_dsds();
+		INFO("INIT: sim_count detecting");
+		std::ifstream fin("proc/simslot_count");
+		char buff[10];
+
+		if (fin.is_open())
+		{
+			fin >> buff;
+			fin.close();
+
+			if (strstr(buff,"2")) {
+			//property_set("ro.product.model", "SM-A300F2");
+			init_dsds();
+			} else {
+			//property_set("ro.product.model", "SM-A300F1");
+			init_ss();
+			}
 		} else {
+		//property_set("ro.product.model", "SM-A300F0");
 		init_ss();
 		}
 
