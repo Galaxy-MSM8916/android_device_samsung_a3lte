@@ -28,6 +28,7 @@
  */
 
 #include <stdlib.h>
+#include <unistd.h>
 #include <cutils/properties.h>
 #include <fstream>
 #include <iostream>
@@ -65,7 +66,7 @@ void vendor_load_properties()
     char devicename[PROP_VALUE_MAX];
     int rc;
 
-    rc = property_get("ro.board.platform", platform, "");
+    rc = property_get("ro.board.platform", platform, NULL);
     if (!rc || !ISMATCH(platform, ANDROID_TARGET))
         return;
 
