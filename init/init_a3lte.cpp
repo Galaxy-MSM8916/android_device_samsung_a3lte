@@ -58,6 +58,57 @@ bool FileExists(const std::string& path)
         return std::ifstream(path.c_str()).good();
 }
 
+static int read_file2(const char *fname, char *data, int max_size)
+{
+    int fd, rc;
+
+    if (max_size < 1)
+        return 0;
+
+    fd = open(fname, O_RDONLY);
+    if (fd < 0) {
+        ERROR("failed to open '%s'\n", fname);
+        return 0;
+    }
+
+    rc = read(fd, data, max_size - 1);
+    if ((rc > 0) && (rc < max_size))
+        data[rc] = '\0';
+    else
+        data[0] = '\0';
+    close(fd);
+
+    return 1;
+}
+
+static void init_alarm_boot_properties()
+{
+    char const *alarm_file = "/proc/sys/kernel/boot_reason";
+    char buf[64];
+
+    if (read_file2(alarm_file, buf, sizeof(buf))) {
+        /*
+         * Setup ro.alarm_boot value to true when it is RTC triggered boot up
+         * For existing PMIC chips, the following mapping applies
+         * for the value of boot_reason:
+         *
+         * 0 -> unknown
+         * 1 -> hard reset
+         * 2 -> sudden momentary power loss (SMPL)
+         * 3 -> real time clock (RTC)
+         * 4 -> DC charger inserted
+         * 5 -> USB charger insertd
+         * 6 -> PON1 pin toggled (for secondary PMICs)
+         * 7 -> CBLPWR_N pin toggled (for external power supply)
+         * 8 -> KPDPWR_N pin toggled (power key pressed)
+         */
+        if (buf[0] == '3')
+            property_set("ro.alarm_boot", "true");
+        else
+            property_set("ro.alarm_boot", "false");
+    }
+}
+
 void vendor_load_properties()
 {
     char platform[PROP_VALUE_MAX];
@@ -67,7 +118,7 @@ void vendor_load_properties()
     int rc;
 
     rc = property_get("ro.board.platform", platform, NULL);
-    if (!rc || !ISMATCH(platform, ANDROID_TARGET))
+    if (!rc)
         return;
 
     property_get("ro.bootloader", bootloader, "A300F");
@@ -133,6 +184,7 @@ void vendor_load_properties()
 		}
 	}
 
+        //Sim count checker by vlw
 		INFO("INIT: sim_count detecting");
 		std::ifstream fin("proc/simslot_count");
 		char buff[10];
@@ -143,16 +195,18 @@ void vendor_load_properties()
 			fin.close();
 
 			if (strstr(buff,"2")) {
-			//property_set("ro.product.model", "SM-A300F2");
+			//This device is dual-sim
 			init_dsds();
 			} else {
-			//property_set("ro.product.model", "SM-A300F1");
+			//This device is single-sim
 			init_ss();
 			}
 		} else {
-		//property_set("ro.product.model", "SM-A300F0");
+		//If can't get sim count then device is single sim (like a FU model)
 		init_ss();
 		}
+
+    init_alarm_boot_properties();
 
     property_get("ro.product.device", device, "A300?");
     strlcpy(devicename, device, sizeof(devicename));
