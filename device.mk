@@ -27,8 +27,3 @@ DEVICE_PACKAGE_OVERLAYS += device/samsung/a3ltexx/overlay
 
 # Inherit from a3-common
 $(call inherit-product, device/samsung/a3-common/common.mk)
-
-ADDITIONAL_DEFAULT_PROPERTIES += \
-    ro.adb.secure=0 \
-    ro.secure=0
-
