@@ -50,7 +50,7 @@ void init_dsds() {
 }
 
 void init_ss() {
-    property_set("ro.multisim.set_audio_params", "false");
+    property_set("ro.multisim.set_audio_params", "true");
     property_set("ro.multisim.simslotcount", "1");
     property_set("persist.radio.multisim.config", "ss");
 }
