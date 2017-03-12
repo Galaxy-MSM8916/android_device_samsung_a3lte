@@ -176,6 +176,9 @@ void vendor_load_properties()
         property_set("ro.product.device", "a3lte");
     }
 
+    property_set("ro.build.description", "a3ltexx-user 5.0.2 LRX22G A300FXXU1BQB2 release-keys");
+    property_set("ro.build.fingerprint", "samsung/a3ltexx/a3lte:5.0.2/LRX22G/A300FXXU1BQB2:user/release-keys");
+
 	int curlang;
 	curlang = property_get("ro.product.locale", platform, ""); 
 	if (!curlang) {	
