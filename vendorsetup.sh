@@ -1,1 +1,1 @@
-add_lunch_combo cm_a3ltexx-userdebug
+add_lunch_combo lineage_a3ltexx-userdebug

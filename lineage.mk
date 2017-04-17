@@ -5,4 +5,4 @@ $(call inherit-product, device/samsung/a3ltexx/full_a3ltexx.mk)
 
 PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=a3ltexx TARGET_DEVICE=a3lte
 
-PRODUCT_NAME := cm_a3ltexx
+PRODUCT_NAME := lineage_a3ltexx
