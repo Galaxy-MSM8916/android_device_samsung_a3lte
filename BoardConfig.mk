@@ -27,7 +27,7 @@
 -include vendor/samsung/a3ltexx/BoardConfigVendor.mk
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := a3ltexx,a3ultexx,a33gxx,a33g
+TARGET_OTA_ASSERT_DEVICE := a3ltexx,a3ultexx,a33gxx,a33g,a3lte,a3ulte
 
 # Kernel
 TARGET_KERNEL_CONFIG := msm8916_sec_defconfig 
