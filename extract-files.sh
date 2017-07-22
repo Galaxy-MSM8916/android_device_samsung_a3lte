@@ -1,4 +1,7 @@
-# Copyright (C) 2015 The Android Open Source Project
+#!/bin/bash
+#
+# Copyright (C) 2016 The CyanogenMod Project
+# Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,15 +14,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+set -e
 
-# Inherit from a3ltexx device
-$(call inherit-product, device/samsung/a3ltexx/device.mk)
+# Required!
+export DEVICE=a3lte
+export DEVICE_COMMON=a3-common
+export VENDOR=samsung
 
-# Set those variables here to overwrite the inherited values.
-PRODUCT_NAME := full_a3ltexx
-PRODUCT_DEVICE := a3ltexx
-PRODUCT_BRAND := samsung
-PRODUCT_MANUFACTURER := samsung
+export SETUP_DEVICE_DIR=1
+export SETUP_DEVICE_COMMON_DIR=0
+export SETUP_BOARD_COMMON_DIR=0
+
+./../../$VENDOR/$DEVICE_COMMON/extract-files.sh $@

@@ -1,0 +1,1 @@
+# All needed proprietary files defined in a3-common tree
